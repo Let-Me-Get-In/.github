@@ -40,6 +40,53 @@ Accessibility is recorded per handicap family — motor, hearing, vision, cognit
 and each place carries a **completeness score**, because "unknown" and "not
 accessible" are not the same answer.
 
+## Where the data comes from
+
+Let Me Get In does not invent accessibility data. Places come from open datasets,
+each with its own licence and attribution requirements.
+
+| Source | Licence | Role |
+|---|---|---|
+| [AccesLibre](https://www.data.gouv.fr/fr/datasets/acceslibre/) (`data.gouv.fr`) | Licence Ouverte / Etalab 2.0 | Primary seed, France-first |
+| [OpenStreetMap](https://www.openstreetmap.org/copyright) | ODbL | Additive, opt-in |
+| [Overture Maps](https://overturemaps.org) | CDLA-Permissive | Additive |
+| Google Places | — | **Never used**: its terms forbid storing the data |
+
+Imports are idempotent per `(source, source_id)`. Duplicates are linked *softly*:
+rows within 100 m are compared by normalized name; a close match joins a canonical
+place and is logged, a doubtful one is flagged for review. Nothing is merged
+destructively, and no source overwrites another.
+
+## What this adds
+
+AccesLibre tells you what is recorded about a place. Let Me Get In adds the layer a
+developer needs in order to **build on** those records:
+
+**1. A typed referential, not per-source free text.** 158 categories, 182 criteria,
+52 filters and 15 official labels, organized in a tree. One vocabulary, whatever
+dataset the place came from — so "entrance width" is a criterion with a type and a
+unit, not a sentence in a CSV column.
+
+**2. Accessibility per handicap family, with a completeness score.** Motor, hearing,
+vision, cognitive. Each place says how much of its record is actually filled in,
+because *"unknown" and "not accessible" are not the same answer* — and most
+directories conflate them.
+
+**3. A versioned contract.** The path is versioned (`/api/v1`), the referential
+carries a `referential_version`, and grids answer `304` through an `ETag` when
+nothing changed. You can build a client that knows when its cached copy is stale.
+
+**4. Multi-source reconciliation.** The same place can arrive from AccesLibre, OSM
+and Overture; it resolves to one canonical entry with a per-source trace, instead of
+three rows a consumer has to deduplicate itself.
+
+**5. Query by what you need, not by what exists.** Search returns places filtered by
+handicap and category, and each result exposes which criteria are known — so a
+client can hide a place it cannot vouch for, rather than showing it as accessible.
+
+The referential is open data. Attribution is required, and the ODbL share-alike
+applies to any derived database that includes OpenStreetMap content.
+
 ## Stack
 
 | Layer | |
