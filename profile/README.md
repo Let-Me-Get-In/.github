@@ -2,9 +2,9 @@
 
 **A normalized accessibility referential, exposed as a public API and a web app.**
 
-[![Search](profile/assets/app-search.jpg)](https://app.letmegetin.org)
-[![Place detail](profile/assets/app-place.jpg)](https://app.letmegetin.org)
-[![API documentation](profile/assets/api-docs.jpg)](https://api.letmegetin.org/docs)
+[![Search](https://raw.githubusercontent.com/Let-Me-Get-In/.github/main/profile/assets/app-search.jpg)](https://app.letmegetin.org)
+[![Place detail](https://raw.githubusercontent.com/Let-Me-Get-In/.github/main/profile/assets/app-place.jpg)](https://app.letmegetin.org)
+[![API documentation](https://raw.githubusercontent.com/Let-Me-Get-In/.github/main/profile/assets/api-docs.jpg)](https://api.letmegetin.org/docs)
 
 [**app.letmegetin.org**](https://app.letmegetin.org) · [**api.letmegetin.org/docs**](https://api.letmegetin.org/docs) · [**source**](https://github.com/Let-Me-Get-In/letmegetin)
 
